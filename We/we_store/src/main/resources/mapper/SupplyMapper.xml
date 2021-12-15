@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.SupplyMapper">
+
+    <insert id="addSupply">
+        insert into supply(bookId,account) values(#{id},#{account});
+    </insert>
+    <delete id="removeSupply">
+        delete from supply where bookId={#id} and account=#{account};
+    </delete>
+    <delete id="delSupply">
+        delete from supply where bookId=#{id};
+    </delete>
+
+    <!-- 分页得到图书列表 -->
+    <select id="getSupplyByPage" resultType="com.example.demo.model.book.Book">
+        select book.* from book right join supply on book.id=supply.bookId limit #{page},#{pageSize}
+    </select>
+
+    <select id="getSupplyAccount" resultType="String">
+        select account from supply where bookId=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.model.user.User">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="imgUrl" property="imgUrl"/>
+        <result column="info" property="info"/>
+        <result column="manage" property="manage"/>
+        <result column="enable" property="enable"/>
+        <result column="registerTime" property="registerTime"/>
+    </resultMap>
+    <insert id="addUser" parameterType="com.example.demo.model.user.User">
+        insert into user(account,password,name,gender,imgUrl,info,manage,enable,registerTime)
+         values(#{account},#{password},#{name},#{gender},#{imgUrl},#{info},#{manage},#{enable},#{registerTime})
+    </insert>
+
+    <select id="getUser" resultType="com.example.demo.model.user.User">
+        select * from user where account = #{account}
+    </select>
+
+    <update id="addInfo">
+        update user set info = #{info} where account = #{account}
+    </update>
+</mapper>
